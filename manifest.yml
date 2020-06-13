@@ -1,7 +1,7 @@
 ---
 applications:
 - name: Demo
-  host: demo
+  host: springboottest
   disk_quota: 1024M
   memory: 512M
   buildpack: java_buildpack
