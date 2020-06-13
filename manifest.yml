@@ -1,0 +1,10 @@
+---
+applications:
+- name: Demo
+  host: demo
+  disk_quota: 1024M
+  memory: 512M
+  buildpack: java_buildpack
+  path: ../target/demo-0.0.1-SNAPSHOT.jar
+  instances: 1
+  domain: cfapp.io
