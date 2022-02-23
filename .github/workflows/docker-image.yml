@@ -15,9 +15,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: build
-      run: mvn clean install
+      run: mvn install
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag springboottest:$(date +%s)   
+      run: docker build . --file Dockerfile --tag springboottest:v1
+    - name: Docker Tag
+      run: docker tag mcr.microsoft.com/springboottest testuwacrsb.azurecr.io/springboottest:v1 
     - name: Docker push
-      run: docker push testuwacrsb.azurecr.io/springboottest:$(date +%s)
+      run: docker push testuwacrsb.azurecr.io/springboottest:v1
       
