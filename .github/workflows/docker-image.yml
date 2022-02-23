@@ -5,7 +5,9 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
+env:
+  ACR_HOST: "testuwacrsb.azurecr.io"
+  
 jobs:
 
   build:
@@ -17,9 +19,9 @@ jobs:
     - name: build
       run: mvn install
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag springboottest:v1
+      run: docker build --build-arg LOGIN_SERVER=${{env.ACR_HOST}} --file Dockerfile --tag springboottest:v1
     - name: Docker Tag
       run: docker tag mcr.microsoft.com/springboottest testuwacrsb.azurecr.io/springboottest:v1 
     - name: Docker push
-      run: docker push testuwacrsb.azurecr.io/springboottest:v1
+      run: docker push ${{env.ACR_HOST}}/springboottest:v1
       
