@@ -21,7 +21,9 @@ jobs:
     - uses: actions/checkout@v2
     - name: build
       run: mvn install
-    - name: ACR Login
+    - name: Azure Login
+      run: az login -u mukherjeerimi13@gmail.com -p Asdfg@123
+    - name: ACR Login 
       run: az acr login --name testuwacrsb
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag ${{env.ACR_HOST}}/${{env.SERVICE_NAME}}:${{env.TAG_NAME}}
