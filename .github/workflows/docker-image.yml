@@ -17,4 +17,7 @@ jobs:
     - name: build
       run: mvn clean install
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag springboottest:$(date +%s)
+      run: docker build . --file Dockerfile --tag springboottest:$(date +%s)   
+    - name: Docker push
+      run: docker push testuwacrsb.azurecr.io/springboottest:$(date +%s)
+      
