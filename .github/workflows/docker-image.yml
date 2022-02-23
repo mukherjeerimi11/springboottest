@@ -7,6 +7,8 @@ on:
     branches: [ master ]
 env:
   ACR_HOST: "testuwacrsb.azurecr.io"
+  SERVICE_NAME: "springboottest"
+  TAG_NAME: "1.0.1"
   
 jobs:
 
@@ -19,9 +21,9 @@ jobs:
     - name: build
       run: mvn install
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag springboottest:v1
+      run: docker build . --file Dockerfile --tag ${{env.ACR_HOST}}/${{env.SERVICE_NAME}}:${{env.TAG_NAME}}
      
     - name: Docker push
-      run: docker push ${{env.ACR_HOST}}
+      run: docker push ${{env.ACR_HOST}}/${{env.SERVICE_NAME}}:${{env.TAG_NAME}}
       
       
