@@ -23,13 +23,11 @@ jobs:
       run: mvn install
 
     - name: AZ Login
-      run: az login az account set --subscription subscription_ID
-    - name: ACR Login 
-      uses: azure/docker-login@v1
-      with:
-        login-server: ${{env.ACR_HOST}}
-        username: mukherjeerimi13@gmail.com
-        password: Asdfg@123
+      run: az login
+    - name: Set Subscription
+      run: az account set --subscription d6c08277-8f36-4adc-8af1-d3b83260da03
+    - name: ACR Login
+      run: az acr login --name testuwacrsb
       
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag ${{env.ACR_HOST}}/${{env.SERVICE_NAME}}:${{env.TAG_NAME}}
