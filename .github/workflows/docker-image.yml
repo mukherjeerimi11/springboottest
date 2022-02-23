@@ -22,6 +22,8 @@ jobs:
     - name: build
       run: mvn install
 
+    - name: AZ Login
+      run: az login az account set --subscription subscription_ID
     - name: ACR Login 
       uses: azure/docker-login@v1
       with:
