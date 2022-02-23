@@ -19,7 +19,7 @@ jobs:
     - name: build
       run: mvn install
     - name: Build the Docker image
-      run: docker build --build-arg LOGIN_SERVER=${{env.ACR_HOST}} --file Dockerfile --tag springboottest:v1
+      run: docker build --build-arg LOGIN_SERVER=${{env.ACR_HOST}} --build-arg --file Dockerfile --build-arg --tag springboottest:v1
     - name: Docker Tag
       run: docker tag mcr.microsoft.com/springboottest testuwacrsb.azurecr.io/springboottest:v1 
     - name: Docker push
