@@ -1,0 +1,51 @@
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    - uses: azure/docker-login@v1
+      with:
+        login-server: testuwacrsb.azurecr.io
+        username: ${{ secrets.acr_testuwacrsb_username }}
+        password: ${{ secrets.acr_testuwacrsb_password }}
+    
+    - name: Build and push image to ACR
+      id: build-image
+      run: |
+        docker build "$GITHUB_WORKSPACE/" -f  "Dockerfile" -t testuwacrsb.azurecr.io/testuwkcsb:${{ github.sha }} --label dockerfile-path=Dockerfile
+        docker push testuwacrsb.azurecr.io/testuwkcsb:${{ github.sha }}
+    
+    - uses: azure/k8s-set-context@v1
+      with:
+         kubeconfig: ${{ secrets.aks_testuwkcsb_kubeConfig }}
+      id: login
+    
+    - name: Create namespace
+      run: |
+        namespacePresent=`kubectl get namespace | grep test-uw-kc-sbaaaa | wc -l`
+        if [ $namespacePresent -eq 0 ]
+        then
+            echo `kubectl create namespace test-uw-kc-sbaaaa`
+        fi
+
+    - uses: azure/k8s-create-secret@v1
+      with:
+        namespace: test-uw-kc-sbaaaa
+        container-registry-url: testuwacrsb.azurecr.io
+        container-registry-username: ${{ secrets.acr_testuwacrsb_username }}
+        container-registry-password: ${{ secrets.acr_testuwacrsb_password }}
+        secret-name: testuwkcsbdockerauth
+       
+    - uses: azure/k8s-deploy@v1.2
+      with:
+        namespace: test-uw-kc-sbaaaa
+        manifests: |
+          manifests/deployment.yml
+          manifests/service.yml
+          manifests/ingress.yml
+        images: |
+          testuwacrsb.azurecr.io/testuwkcsb:${{ github.sha }}
+        imagepullsecrets: |
+          testuwkcsbdockerauth
