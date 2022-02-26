@@ -18,7 +18,7 @@ jobs:
     - name: Build and push image to ACR
       id: build-image
       run: |
-        docker build "$GITHUB_WORKSPACE/" -f  "Dockerfile" -t ${{env.ACR_HOST}}/${{env.SERVICE_NAME}}:${{env.TAG_NAME}} --label dockerfile-path=Dockerfile
+        docker build "$GITHUB_WORKSPACE/" -f  "Dockerfile" -t "${{env.ACR_HOST}}/${{env.SERVICE_NAME}}:${{env.TAG_NAME}}" --label dockerfile-path=Dockerfile
         docker push ${{env.ACR_HOST}}/${{env.SERVICE_NAME}}:${{env.TAG_NAME}}
     
     - uses: azure/k8s-set-context@v1
