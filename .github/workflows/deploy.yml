@@ -3,7 +3,7 @@
 name: Release
 on:
   workflow_run:
-    workflows: ["Run Tests"]
-    branches: [main]
+    workflows: ["Docker Image CI"]
+    branches: [master]
     types: 
       - completed
