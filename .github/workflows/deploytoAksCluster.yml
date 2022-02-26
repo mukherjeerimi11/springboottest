@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
+    - name: build
+      run: mvn install
     
     - uses: azure/docker-login@v1
       with:
