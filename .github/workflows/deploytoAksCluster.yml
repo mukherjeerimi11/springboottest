@@ -1,4 +1,9 @@
 on: [push]
+env:
+  ACR_HOST: "testuwacrsb.azurecr.io"
+  ACR_USER: ""
+  SERVICE_NAME: "springboottest"
+  TAG_NAME: "1.0.1"
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -7,10 +12,6 @@ jobs:
     
     - uses: azure/docker-login@v1
       with:
-        ACR_HOST: "testuwacrsb.azurecr.io"
-        ACR_USER: ""
-        SERVICE_NAME: "springboottest"
-        TAG_NAME: "1.0.1"
         login-server: testuwacrsb.azurecr.io
         username: ${{ secrets.acr_testuwacrsb_username }}
         password: ${{ secrets.acr_testuwacrsb_password }}
@@ -18,7 +19,7 @@ jobs:
     - name: Build and push image to ACR
       id: build-image
       run: |
-        docker build "$GITHUB_WORKSPACE/" -f  "Dockerfile" -t "${{env.ACR_HOST}}/${{env.SERVICE_NAME}}:${{env.TAG_NAME}}" --label dockerfile-path=Dockerfile
+        docker build "$GITHUB_WORKSPACE/" -f  "Dockerfile" -t ${{env.ACR_HOST}}/${{env.SERVICE_NAME}}:${{env.TAG_NAME}} --label dockerfile-path=Dockerfile
         docker push ${{env.ACR_HOST}}/${{env.SERVICE_NAME}}:${{env.TAG_NAME}}
     
     - uses: azure/k8s-set-context@v1
