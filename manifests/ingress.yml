@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: "testuwkcsb-5c0a"
+    labels:
+        app: "testuwkcsb-5c0a"
+    annotations:
+        kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+    rules:
+        - host: test-uw-kc-sbaaaa-testuwkcsb-5c0a.07c4576f8d8c4eccb031.westus.aksapp.io
+          http:
+            paths:
+            - path: /
+              backend:
+                serviceName: "testuwkcsb-5c0a"
+                servicePort: 80
