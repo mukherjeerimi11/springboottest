@@ -2,6 +2,11 @@ apiVersion : apps/v1
 kind: Deployment
 metadata:
   name: "testuwkcsb-5c0a"
+env:
+  ACR_HOST: "testuwacrsb.azurecr.io"
+  ACR_USER: ""
+  SERVICE_NAME: "springboottest"
+  TAG_NAME: "1.0.1"
 spec:
   replicas: 2
   selector:
@@ -14,6 +19,6 @@ spec:
     spec:
       containers:
         - name: "testuwkcsb-5c0a"
-          image: "testuwacrsb.azurecr.io/testuwkcsb"
+          image: ${{env.ACR_HOST}}/${{env.SERVICE_NAME}}:${{env.TAG_NAME}}
           ports:
           - containerPort: 80
