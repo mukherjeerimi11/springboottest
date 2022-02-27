@@ -19,6 +19,6 @@ spec:
     spec:
       containers:
         - name: "testuwkcsb-5c0a"
-          image: ${{env.ACR_HOST}}/${{env.SERVICE_NAME}}:${{env.TAG_NAME}}
+          image: "testuwacrsb.azurecr.io/springboottest:1.0.1"
           ports:
           - containerPort: 80
