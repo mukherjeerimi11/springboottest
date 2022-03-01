@@ -14,4 +14,4 @@ spec:
             - path: /
               backend:
                 serviceName: "springboottest"
-                servicePort: 80
+                servicePort: 8080
