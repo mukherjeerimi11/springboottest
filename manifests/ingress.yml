@@ -12,7 +12,8 @@ spec:
         - host: test-uw-kc-sbaaaa-testuwkcsb-5c0a.07c4576f8d8c4eccb031.westus.aksapp.io
           http:
             paths:
-            - path: /health
+            - path: /
+              pathType: prefix
               backend:
                 serviceName: "springboottest"
                 servicePort: 8080
