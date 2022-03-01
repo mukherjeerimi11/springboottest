@@ -1,9 +1,9 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-    name: "testuwkcsb-5c0a"
+    name: "springboottest-ingress"
     labels:
-        app: "testuwkcsb-5c0a"
+        app: "springboottest"
     annotations:
         kubernetes.io/ingress.class: addon-http-application-routing
 spec:
@@ -13,5 +13,5 @@ spec:
             paths:
             - path: /
               backend:
-                serviceName: "testuwkcsb-5c0a"
+                serviceName: "springboottest"
                 servicePort: 80
