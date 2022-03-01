@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
     name: "springboottest-ingress"
     labels:
-        app: "springboottest"
+        app: "springboottest-ingress"
     annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /
        
