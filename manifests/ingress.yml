@@ -5,13 +5,14 @@ metadata:
     labels:
         app: "springboottest"
     annotations:
-        kubernetes.io/ingress.class: addon-http-application-routing
+        nginx.ingress.kubernetes.io/rewrite-target: /
+       
 spec:
     rules:
         - host: test-uw-kc-sbaaaa-testuwkcsb-5c0a.07c4576f8d8c4eccb031.westus.aksapp.io
           http:
             paths:
-            - path: /
+            - path: /health
               backend:
                 serviceName: "springboottest"
                 servicePort: 8080
