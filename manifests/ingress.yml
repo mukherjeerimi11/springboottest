@@ -15,7 +15,5 @@ spec:
             - path: /
               pathType: Prefix
               backend:
-                service:
-                  name: "springboottest"
-                  port:
-                    number: 8080
+                serviceName: "springboottest"
+                servicePort: 8080
