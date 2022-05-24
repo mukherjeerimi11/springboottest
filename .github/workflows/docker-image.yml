@@ -2,9 +2,13 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    paths:
+      - '**.js'
+  #push:
+    #branches: [ master ]
+  #pull_request:
+    #branches: [ master ]
+    
 env:
   ACR_HOST: "testuwacrsb.azurecr.io"
   ACR_USER: ""
