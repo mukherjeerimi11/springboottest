@@ -1,4 +1,8 @@
-on: [push]
+#on: [push]
+on:
+  push:
+    paths:
+      - '**.js'
 env:
   ACR_HOST: "testuwacrsb.azurecr.io"
   ACR_USER: ""
